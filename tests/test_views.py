@@ -1,4 +1,3 @@
-import pytest
 import json
 
 parse_url = "/api/parse/"
@@ -23,16 +22,19 @@ def test_api_parse_succeeds(client):
         "address_type": "Street Address"
     }
 
+
 def test_api_parse_raises_error(client):
     address_string = '123 main st chicago il 123 main st'
     response = client.get(parse_url, {"address": address_string})
 
     assert response.status_code == 400
 
+
 def test_api_parse_raises_error_on_missing_address_string(client):
     response = client.get(parse_url, {})
 
     assert response.status_code == 400
+
 
 def test_api_parse_succeeds_on_empty_string(client):
     address_string = ""
